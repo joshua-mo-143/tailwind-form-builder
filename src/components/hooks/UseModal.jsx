@@ -3,6 +3,7 @@ import React, {useState} from 'react'
 const useModal = () => {
 
     const [vis, setVis] = useState(false);
+    const [deleteVis, setDeleteVis] = useState(false);
     const [cssVis, setCssVis] = useState(false);
     const [aboutVis, setAboutVis] = useState(false);
 
@@ -18,8 +19,12 @@ const useModal = () => {
       setAboutVis(!aboutVis);
     }
 
+    function toggleDeleteModal() {
+      setDeleteVis(!deleteVis);
+    }
+
   return {vis,
-toggleExportModal, cssVis, toggleCSSModal, aboutVis, toggleAboutModal
+toggleExportModal, cssVis, toggleCSSModal, aboutVis, toggleAboutModal, deleteVis, toggleDeleteModal
 }
 }
 

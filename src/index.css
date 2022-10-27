@@ -12,4 +12,9 @@
     padding: 0;
     background-color: #f5f5f5;
   }
+
+  #sidebar {
+    background: linear-gradient(2deg, #FF7276, #BF565A);
+  }
+
 }

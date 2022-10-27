@@ -8,23 +8,16 @@ export const useFormVarsStore = create((set) => ({
     newField: {
         fieldID: "",
         fieldType: "",
+        fieldText: "",
+        inputFieldName: "",
+        required: false
     },
     setNewField: (newField) => set(() => ({newField: newField})),
 
-    fieldID: "",
-    setFieldID: (fieldID) => set(() => ({fieldID: fieldID})),
+    defaultClassLists: {
+        Section: ["form-section", "p-5", "my-5", "w-full", "border", "rounded-xl", "shadow-sm", 'relative', 'text-center'],
 
-
-    setFieldType: (fieldType) => set(() => ({fieldType: fieldType})),
-
-    fieldText: "",
-    setFieldText: (fieldText) => set(() => ({fieldText: fieldText})),
-
-    inputFieldName: "",
-    setInputFieldName: (inputFieldName) => set(() => ({inputFieldName: inputFieldName})),
-
-    required: false,
-    setRequired: (required) => set(() => ({required: required})),
+    },  
 
     settingsVis: true,
     toggleSettingsVis: (settingsVis) => set(() => ({settingsVis: settingsVis})),
