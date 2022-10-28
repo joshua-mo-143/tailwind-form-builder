@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { useSectionStore } from '../zustandStore';
 
 const CSSModal = ({vis, hide, rawCSS, setRawCSS}) =>  vis ? ReactDOM.createPortal(
-    <div id="modal-overlay" className="absolute top-0 w-screen h-screen backdrop-blur-sm flex flex-col justify-start">
+    <div id="modal-overlay" className="z-20 absolute top-0 w-screen h-screen backdrop-blur-sm flex flex-col justify-start">
         <div id="modal-wrapper">
     <div id="modal" className="mt-10 relative bg-white shadow-md py-5 w-full lg:w-4/5 h-[calc(100%*1)] m-auto">
         <div id="modal-header" className="relative">

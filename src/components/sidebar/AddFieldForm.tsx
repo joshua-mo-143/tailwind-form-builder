@@ -7,8 +7,8 @@ import useField from '../hooks/useField';
 
 const AddFieldForm = () => {
 
-  const [newField, setNewField] = useFormVarsStore((state) => [state.newField, state.setNewField]);
-    const [addFieldVis, toggleAddFieldVis] = useFormVarsStore((state) => [state.addFieldVis, state.toggleAddFieldVis]);
+  const [newField, setNewField] = useFormVarsStore((state: any) => [state.newField, state.setNewField]);
+    const [addFieldVis, toggleAddFieldVis] = useFormVarsStore((state:any) => [state.addFieldVis, state.toggleAddFieldVis]);
 
   const {addField, addOption} = useField();
 
@@ -28,7 +28,7 @@ const AddFieldForm = () => {
 <label htmlFor="field-type" className="my-4 block flex gap-4 w-min m-auto flex-row justify-center items-center">
   <span>Field type:</span>
   <select required name="field-type" className="px-5 py-2 w-min" id="field-type" value={newField['fieldType']} onChange={e => setNewField({...newField, 'fieldType': e.target.value})}>
-    <option default value="">Pick an option</option>
+    <option value="">Pick an option</option>
     <option value="string">Title</option>
     <option value="richtext">Text</option>
     <option value="input">Input</option>

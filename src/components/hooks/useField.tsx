@@ -1,14 +1,14 @@
 import React from 'react'
-import { useFormVarsStore, useSectionStore } from '../zustandStore';
+import { useFormVarsStore, useSectionStore, useSidebarStore } from '../zustandStore';
 
 const useField = () => {
 
-  const [newField, setNewField] = useFormVarsStore((state) => [state.newField, state.setNewField]);
-  const [sectionSelected, setSectionSelected] = useSectionStore((state) => [state.sectionSelected, state.setSectionSelected]);
+  const [newField, setNewField] = useFormVarsStore((state: any) => [state.newField, state.setNewField]);
+  const sidebarVis = useSidebarStore((state) => state.sidebarVis);
 
     const addOption = (e) => {
       e.preventDefault()
-        const options = document.querySelector('#options');
+        const options = document.querySelector('#options') as HTMLSelectElement;
         const optionToAdd = document.createElement('label');
         optionToAdd.classList.add("my-2", "block", "flex", "gap-4", "flex-row", "justify-center", "items-center");
         optionToAdd.setAttribute("htmlFor", 'options1');
@@ -17,6 +17,7 @@ const useField = () => {
         <span>Option ${options.childElementCount+1}:</span> 
         <input name="options${options.childElementCount+1}" classname="checkbox-option px-5 py-2"></input> 
         `
+        
         options.append(optionToAdd);
       }
 
@@ -27,9 +28,9 @@ const useField = () => {
           return alert("An element with this ID already exists!")
         }
 
-        const section = document.querySelector(`#${sectionSelected}`);
+        const section = document.querySelector(`#${sidebarVis['selectedSection']}`) as HTMLElement;
 
-        if (section == "") {
+        if (section == null) {
           return alert("No section selected!");
       }
 
@@ -59,14 +60,14 @@ const useField = () => {
             elementToAdd.setAttribute('for', newField['fieldID']);
             elementToAdd.classList.add("my-2","block", "flex", "flex-col", "justify-center", "items-center");
     
-            const allOptions = document.querySelectorAll('#options > label > input');
+            const allOptions = document.querySelectorAll('#options > label > input') as NodeListOf<HTMLInputElement>;
 
             if (newField['inputFieldName'] > "") {
               elementToAdd.innerHTML += `<p>${newField['inputFieldName']}</p>`;
             }
     
           for (let i = 0; i < allOptions.length; i++) {
-            if (allOptions[i].value == "") {
+            if (!allOptions[i].value) {
               continue
             }
               elementToAdd.innerHTML += `
@@ -78,7 +79,7 @@ const useField = () => {
     
           case "textarea": 
           elementToAdd = document.createElement('label');
-          elementToAdd.setAttribute('for', newField[fieldID]);
+          elementToAdd.setAttribute('for', newField['fieldID']);
           elementToAdd.classList.add("my-4","block", "flex", "gap-4", "flex-col");
           elementToAdd.innerHTML = `
           <p className="block">

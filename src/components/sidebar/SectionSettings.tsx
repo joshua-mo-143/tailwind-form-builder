@@ -1,30 +1,28 @@
 import React, {useEffect, useState} from 'react'
-import { useSectionStore } from '../zustandStore'
+import { useSectionStore, useSidebarStore} from '../zustandStore'
 import { faMinus, faPassport, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import useModal from '../hooks/UseModal';
 import useSection from '../hooks/useSection';
 
 const SectionSettings = (sectionss) => {
 
-    const [sectionSettingsVis, toggleSectionSettingsVis] = useSectionStore((state) => [state.sectionSettingsVis, state.toggleSectionSettingsVis]);
-    const [changeSectionName, setChangeSectionName] = useSectionStore((state) => [state.changeSectionName, state.setChangeSectionName]);
-    const [sectionSelected, setSectionSelected] = useSectionStore((state) => [state.sectionSelected, state.setSectionSelected]);
+    const [sidebarVis, setSidebarVis] = useSidebarStore((state) => [state.sidebarVis, state.setSidebarVis]);
+    const [changeSectionName, setChangeSectionName] = useSectionStore((state: any) => [state.changeSectionName, state.setChangeSectionName]);
     const {setSectionName} = useSection();
 
       const toggleChangeSectionName = (e) => {
-        const changenamediv = document.querySelector('#changenamesection')
+        const changenamediv = document.querySelector('#changenamesection') as HTMLElement;
         changenamediv.classList.toggle('hidden');
       }
 
       const toggleBorder = () => {
-        let section = document.querySelector(`#${sectionSelected}`);
+        let section = document.querySelector(`#${sidebarVis['selectedSection']}`) as HTMLElement;
         section.classList.toggle("border");
         section.classList.toggle("shadow-sm");
       }
 
       const handleNameChange = () => {
-        let meme = document.querySelector(`#${sectionSelected}`);
+        let meme = document.querySelector(`#${sidebarVis['selectedSection']}`);
         setSectionName(meme, changeSectionName);
       }
 
@@ -32,9 +30,9 @@ const SectionSettings = (sectionss) => {
 
   return (
     <div className="mt-5 bg-blue-200 w-4/5 m-auto px-4 py-2 rounded-xl">
-            <p className="text-lg cursor-pointer" onClick={() => toggleSectionSettingsVis(!sectionSettingsVis)}>Section Settings
-            {sectionSettingsVis ? <FontAwesomeIcon icon={faMinus} className="ml-10"/> : <FontAwesomeIcon icon={faPlus} className="ml-10"/>} </p>
-          <div className={sectionSettingsVis ? "" : "hidden"}>
+          <p className="text-lg cursor-pointer" onClick={() => setSidebarVis({...sidebarVis, 'sectionSettingsVis': !sidebarVis['sectionSettingsVis']})}>Section Settings
+            {sidebarVis['sectionSettingsVis'] == true ? <FontAwesomeIcon icon={faMinus} className="ml-10"/> : <FontAwesomeIcon icon={faPlus} className="ml-10"/>} </p>
+          <div className={sidebarVis['sectionSettingsVis'] ? "" : "hidden"}>
             
 
                 <label htmlFor="change-name" id="change-name" className="my-4 block flex gap-4 flex-col justify-center py-2 px-5 rounded-xl bg-blue-300 m-auto">

@@ -1,6 +1,20 @@
 import create from 'zustand';
 
-export const useFormVarsStore = create((set) => ({
+interface FormField {
+    addFieldVis: Boolean
+    toggleAddFieldVis: (addFieldVis: Boolean) => void
+    newField: Object
+    setNewField: (newField: Boolean) => void
+    settingsVis: Boolean
+    toggleSettingsVis: (settingsVis: Boolean) => void
+}
+
+interface Sidebar {
+    sidebarVis: Object,
+    setSidebarVis: (SidebarVis: Object) => void
+}
+
+export const useFormVarsStore = create<FormField>((set) => ({
 
     addFieldVis: false,
     toggleAddFieldVis: (addFieldVis) => set(() => ({addFieldVis: addFieldVis})),
@@ -16,7 +30,6 @@ export const useFormVarsStore = create((set) => ({
 
     defaultClassLists: {
         Section: ["form-section", "p-5", "my-5", "w-full", "border", "rounded-xl", "shadow-sm", 'relative', 'text-center'],
-
     },  
 
     settingsVis: true,
@@ -36,8 +49,18 @@ export const useSectionStore = create((set) => ({
 }))
 
 export const formDataStore = create((set) => ({
-    formData: "",
-
     rawCSS: "",
     setRawCSS: (rawCSS) => set(() => ({rawCSS: rawCSS})),
+}))
+
+export const useSidebarStore = create<Sidebar>((set) => ({
+    sidebarVis: {
+        addFieldVis: false,
+        settingsVis: true,
+        sectionSettingsVis: false,
+        selectedSection: ""
+    },
+
+    setSidebarVis: (sidebarVis) => set(() => ({sidebarVis: sidebarVis}))
+
 }))

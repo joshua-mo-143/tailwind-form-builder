@@ -1,11 +1,11 @@
 import React from 'react'
-import { useFormVarsStore, useSectionStore } from '../zustandStore';
+import { useFormVarsStore, useSectionStore, useSidebarStore } from '../zustandStore';
 
 const useSection = () => {
 
-    const defaultClassLists = useFormVarsStore((state) => state.defaultClassLists);
-    const [setSectionSelected] = useSectionStore((state) => [state.setSectionSelected])
-    const [changeSectionName, setChangeSectionName] = useSectionStore((state) => [state.changeSectionName, state.setChangeSectionName]);;
+    const [sidebarVis, setSidebarVis] = useSidebarStore((state) => [state.sidebarVis, state.setSidebarVis]);
+    const defaultClassLists = useFormVarsStore((state:any) => state.defaultClassLists);
+    const [changeSectionName, setChangeSectionName] = useSectionStore((state:any) => [state.changeSectionName, state.setChangeSectionName]);
 
 
     const setSectionName = (section, sectionName) => {
@@ -20,26 +20,27 @@ const useSection = () => {
           setChangeSectionName("");
           return "Success!"
       }
-
-    
+      
       const appendSection = (section) => {
-        const formDOM = document.querySelector('#FormDOM');
+        const formDOM = document.querySelector('#FormDOM') as HTMLFormElement;
         formDOM.append(section);
-        setSectionSelected(section.id);
-        document.querySelector('#new-section-name').value = "";
+        setSidebarVis({...sidebarVis, 'selectedSection': section.id});
+        const newNameSelector = document.querySelector('#new-section-name') as HTMLInputElement;
+        newNameSelector.value = "";
       }
 
-      const createSection = (e) => {
+      const createSection = (e: any) => {
         e.preventDefault();
-        let newSection = document.querySelector('#new-section-name').value;
+        let newSection = document.querySelector('#new-section-name') as HTMLInputElement;
         let elementToAdd = document.createElement('section');
-          if (setSectionName(elementToAdd, newSection) == null) {
+          if (setSectionName(elementToAdd, newSection.value) == null) {
             return;
           }
         elementToAdd.classList.add(...defaultClassLists['Section']);
         elementToAdd.innerHTML = `<h1 class="text-2xl w-min m-auto" id="${elementToAdd.id}-title">${elementToAdd.getAttribute('data-name')}</h1>`;
         appendSection(elementToAdd);
-        document.querySelector('#new-section-panel').classList.toggle('hidden');
+        const newSectionPanel = document.querySelector('#new-section-panel') as HTMLDivElement;
+        newSectionPanel.classList.toggle('hidden');
       }
     
 

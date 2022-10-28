@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { motion } from 'framer-motion';
 
 const AboutModal = ({vis, hide}) =>  vis ? ReactDOM.createPortal(
-    <motion.div id="modal-overlay" className="absolute top-0 w-screen h-screen backdrop-blur-sm flex flex-col justify-start lg:justify-center"
+    <motion.div id="modal-overlay" className="z-20 absolute top-0 w-screen h-screen backdrop-blur-sm flex flex-col justify-start lg:justify-center"
     initial={{backdropFilter: 'blur(0px)'}}
     animate={{backdropFilter: 'blur(10px)'}}
     exit={{opacity: 0}}>
@@ -15,7 +15,7 @@ const AboutModal = ({vis, hide}) =>  vis ? ReactDOM.createPortal(
     animate={{top: 0}}
     exit={{bottom:"-200%"}}>
         <div id="modal-header" className="relative">
-            <button className="absolute right-2 lg:-top-4 z-50 active:text-red-500" id="modal-button" type="button" data-dismiss="modal" onClick={hide}>
+            <button className="absolute right-2 lg:-top-4 z-50" id="modal-button" type="button" data-dismiss="modal" onClick={hide}>
                 <FontAwesomeIcon icon={faMultiply} className="text-red-500"/>
             </button>
                     <>
