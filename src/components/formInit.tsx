@@ -5,7 +5,7 @@ type Props = {}
 const formInit = (props: Props) => {
   return (
     <div>
-    
+    </div>
   )
 }
 

@@ -36,13 +36,29 @@ const ElementForm = () => {
   }
 
   const buttonToggle = {
-    close: { transform: "rotateZ(45deg)", color: "green",
+    open: { 
+      transform: "rotateZ(45deg)", color: "green",
     transition: {
         all: {duration: .3}
     }
    },
-    open: {
+    close: {
       transform: "rotateZ(0deg)", color: "red",
+      transition: {
+        all: {duration: .3},
+      }
+    }
+  }
+  
+  const buttonSize = {
+    open: {
+      transform: "scale(0.75)",
+      transition: {
+        all: {duration: .3},
+      }
+    },
+    close: {
+      transform: "scale(1)",
       transition: {
         all: {duration: .3},
       }
@@ -94,13 +110,14 @@ const ElementForm = () => {
       <CSSModal vis={cssVis} hide={toggleCSSModal} rawCSS={rawCSS} setRawCSS={setRawCSS} />
       <ExportModal vis={vis} hide={toggleExportModal} formData={formData} setData={setData} />
       <AboutModal vis={aboutVis} hide={toggleAboutModal}/>
-      <button className="z-20 absolute top-1 left-1 bg-white rounded-xl shadow-md" onClick={() => setSidebarVis({...sidebarVis, 'settingsVis': !sidebarVis['settingsVis']})}>
+      <motion.button className="z-20 absolute top-1 left-1 bg-white rounded-xl shadow-md" onClick={() => setSidebarVis({...sidebarVis, 'settingsVis': !sidebarVis['settingsVis']})}
+      animate={sidebarVis['settingsVis'] ? "open" : "close"} variants={buttonSize}>
          <AnimatePresence>
          <motion.div className="" animate={sidebarVis['settingsVis'] ? "close" : "open"} variants={buttonToggle} id="menu-button">
           <FontAwesomeIcon icon={faMultiply} size="lg"/>
          </motion.div> 
          </AnimatePresence>
-         </button>
+         </motion.button>
     <AnimatePresence>
         <motion.div className={sidebarVis['settingsVis'] ? "z-10 w-screen lg:w-1/4 min-h-screen text-center font-bold relative pt-5" : "z-10 w-screen  lg:w-1/4 min-h-screen rounded-xl"}
           animate={sidebarVis['settingsVis'] ? "open" : "closed"}

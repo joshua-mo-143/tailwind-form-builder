@@ -1,13 +1,18 @@
 import React from 'react'
-import {Router, Route, Routes} from 'react-router-dom'
-type Props = {}
+import {Router, Route, Routes, useParams, BrowserRouter} from 'react-router-dom'
+import FormBuilder from './FormBuilder'
+import Home from './Home'
 
-const AllPages = (props: Props) => {
+
+const AllPages = () => {
   return (
-    <Routes>
-      <Route path="/" component={<Home/>}/>
-      <Route path="/formbuilder" component={<FormBuilder/>}/>
+<BrowserRouter>
+      <Routes>
+      <Route path="/"  element={<Home/>}/>
+      <Route path="/formbuilder" element={<FormBuilder/>}/>
       </Routes>
+      </BrowserRouter>
+
   )
 }
 
