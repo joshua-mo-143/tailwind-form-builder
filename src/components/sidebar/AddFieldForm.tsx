@@ -56,7 +56,7 @@ const AddFieldForm = () => {
   </label>
 
 </div>
-  <p className="bg-gray-300 rounded-xl shadow-sm cursor-pointer">Add new option <FontAwesomeIcon icon={faPlus} onClick={addOption}/></p>
+  <p className="bg-gray-300 rounded-xl shadow-sm cursor-pointer" onClick={addOption}>Add new option <FontAwesomeIcon icon={faPlus}/></p>
   </>
 :
 "" }
