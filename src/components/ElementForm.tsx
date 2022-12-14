@@ -130,7 +130,7 @@ const ElementForm = () => {
               null
               :
               <>
-                <div className="text-lg mt-10">
+                <div className="text-lg mt-10" id="showSelectedSection">
                   <span>Section selected: {sidebarVis['selectedSection']} </span>
                 </div>
                 <AddFieldForm />

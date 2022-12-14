@@ -37,7 +37,7 @@ const useSection = () => {
             return;
           }
         elementToAdd.classList.add(...defaultClassLists['Section']);
-        elementToAdd.innerHTML = `<h1 class="text-2xl w-min m-auto" id="${elementToAdd.id}-title">${elementToAdd.getAttribute('data-name')}</h1>`;
+        elementToAdd.innerHTML = `<h1 class="text-2xl m-auto" id="${elementToAdd.id}-title">${elementToAdd.getAttribute('data-name')}</h1>`;
         appendSection(elementToAdd);
         const newSectionPanel = document.querySelector('#new-section-panel') as HTMLDivElement;
         newSectionPanel.classList.toggle('hidden');
